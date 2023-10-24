@@ -21,7 +21,7 @@ module.exports = {
 		const email = new TextInputBuilder()
 			.setCustomId('E-Mail Adress')
 			// The label is displayed above the text input field
-			.setLabel('E-Mail adress')
+			.setLabel('E-Mail adress:')
 			// single line of text
 			.setStyle(TextInputStyle.Short)
 			// this is a placeholder in the text input field
@@ -29,16 +29,23 @@ module.exports = {
 
 		const verificationCode = new TextInputBuilder()
 			.setCustomId('Verification Code')
-			.setLabel('(optinal) join Team with verification Code')
+			.setLabel('(optinal) join Team with verification Code:')
+			.setStyle(TextInputStyle.Short)
+			.setRequired(false)
+
+		const teamName = new TextInputBuilder()
+			.setCustomId('teamName')
+			.setLabel('(optional) Choose a teamname')
 			.setStyle(TextInputStyle.Short)
 			.setRequired(false)
 
 		// for every textinput (max. 5) you need a Actionrow
 		const actionRowEmail = new ActionRowBuilder().addComponents(email);
-		const actionRowVerificationCode = new ActionRowBuilder().addComponents(verificationCode)
+		const actionRowVerificationCode = new ActionRowBuilder().addComponents(verificationCode);
+		const actionRowTeamName = new ActionRowBuilder().addComponents(teamName);
 
 		// Add inputs to modal
-		modal.addComponents(actionRowEmail, actionRowVerificationCode)
+		modal.addComponents(actionRowEmail, actionRowVerificationCode, actionRowTeamName)
 
 		// Show modal to user
 		await interaction.showModal(modal)
