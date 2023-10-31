@@ -7,13 +7,13 @@ const { SlashCommandBuilder,
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('registration')
-		.setDescription('This command starts the registration process. You can provide a Team-Code to join an existing Team.'),
+		.setDescription('Starts the registration process. You can provide a Team-ID to join an existing Team.'),
 	async execute(interaction) {
 
 		// Create the modal
 		const modal = new ModalBuilder()
 			.setCustomId('email')
-			.setTitle('Emails of the participants are required');
+			.setTitle('Registration for the Challenge #2');
 
 		// Add components to the modal
 
@@ -29,15 +29,17 @@ module.exports = {
 
 		const verificationCode = new TextInputBuilder()
 			.setCustomId('Verification Code')
-			.setLabel('(optinal) join Team with verification Code:')
+			.setLabel('join existing Team with Team-ID (optional)')
 			.setStyle(TextInputStyle.Short)
 			.setRequired(false)
+			.setPlaceholder('Only needed if joining existing team')
 
 		const teamName = new TextInputBuilder()
 			.setCustomId('teamName')
-			.setLabel('(optional) Choose a teamname')
+			.setLabel('Choose a teamname (optional)')
 			.setStyle(TextInputStyle.Short)
 			.setRequired(false)
+			.setPlaceholder('Choose a teamname')
 
 		// for every textinput (max. 5) you need a Actionrow
 		const actionRowEmail = new ActionRowBuilder().addComponents(email);

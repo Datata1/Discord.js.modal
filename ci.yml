@@ -1,0 +1,9 @@
+prepare:
+  steps:
+    - command: npm install
+test:
+  steps:
+    - command: NODE_PATH=. node -v
+run:
+  steps:
+    - command: npm run start

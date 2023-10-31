@@ -1,7 +1,7 @@
 const sqlite3 = require('sqlite3').verbose();
 
 // Erstelle oder öffne die Datenbank
-const db = new sqlite3.Database('meineDatenbank.db', (err) => {
+const db = new sqlite3.Database('Hackathon2.db'', (err) => {
   if (err) {
     console.error(err.message);
   } else {
