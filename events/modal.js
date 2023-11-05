@@ -57,7 +57,7 @@ module.exports = {
 		if (interaction.customId === 'email') {
 
 			// provide the path to the sqlite database
-			let db = new sqlite3.Database('Hackathon2.db')
+			let db = new sqlite3.Database('Member.db')
 
 			// these are the textinputs and interaction user related data
 			const user = interaction.user
@@ -66,6 +66,7 @@ module.exports = {
 			const email = interaction.fields.getTextInputValue('E-Mail Adress')
 			const verificationCodeInput = interaction.fields.getTextInputValue('Verification Code')
 			const teamName = interaction.fields.getTextInputValue('teamName')
+			const roleID = process.env.roleId
 
 			// The insert satement to insert data in a table correctly
 			// note: teamid is autoincrement, so we dont need to specify it
@@ -114,13 +115,13 @@ module.exports = {
                                 })
 
 								// after registration add new role to user
-								const role = interaction.guild.roles.cache.get('1168955491515379856');  // the role id is hard coded here
+								const role = interaction.guild.roles.cache.get(roleID);  // the role id is hard coded here
 								await interaction.member.roles.add(role);
 
 								// 2. send dm to interaction user with onboarding information
 								const embed = new EmbedBuilder()
 									.setColor(0x2f3136)
-									.setTitle('Welcome to the Community Challenge #2')
+									.setTitle('Some Title')
 									.setDescription('You are now a participant.')
 									.setTimestamp()
 									.addFields(
@@ -128,8 +129,6 @@ module.exports = {
 										{name: '\u200B', value: '\u200B'},
 										{name: 'Team name', value: `${username}`, inline:true},
 										{name: 'E-Mail', value: `${email}`, inline: true},
-										{name: '\u200B', value: '\u200B'},
-										{name:'If you have any question', value: 'feel free to reach out to us on the Community Server! :)'}
 									)
 								
 
@@ -164,22 +163,20 @@ module.exports = {
 								  });
 
 								// after registration add new role to user
-									const role = interaction.guild.roles.cache.get('1168955491515379856');
+									const role = interaction.guild.roles.cache.get(roleID);
 									await interaction.member.roles.add(role);
 
 								// dm to user
 								const embed = new EmbedBuilder()
 									.setColor(0x2f3136)
-									.setTitle('Welcome to the Community Challenge #2')
+									.setTitle('Some Title')
 									.setDescription('You are now a participant.')
 									.setTimestamp()
 									.addFields(
 										{name: 'This is the Team-ID:', value: `**${verificationCode}**\n\nSend this Code to your friends and they can join your Team!\nA team can have up to 3 members.`},
 										{name: '\u200B', value: '\u200B'},
 										{name: 'Team name', value: `${newTeamName}`, inline:true},
-										{name: 'E-Mail', value: `${email}`, inline: true},
-										{name: '\u200B', value: '\u200B'},
-										{name:'If you have any question', value: 'feel free to reach out to us on the Community Server! :)'}
+										{name: 'E-Mail', value: `${email}`, inline: true}
 									)
 								user.send({embeds: [embed]}) // code here the message
 
@@ -219,7 +216,7 @@ module.exports = {
 									  }
 									  console.log(`A row has been inserted with rowid ${this.lastID}`);
 										// after registration add new role to user
-										const role = interaction.guild.roles.cache.get('1168955491515379856');
+										const role = interaction.guild.roles.cache.get(roleID);
 										await interaction.member.roles.add(role);
 					
 										// 2. send dm to interaction user with onboarding information
@@ -233,8 +230,6 @@ module.exports = {
 										{name: '\u200B', value: '\u200B'},
 										{name: 'Team name', value: `${teamName}`, inline:true},
 										{name: 'E-Mail', value: `${email}`, inline: true},
-										{name: '\u200B', value: '\u200B'},
-										{name:'If you have any question', value: 'feel free to reach out to us on the Community Server! :)'}
 									)					
 								user.send({embeds: [embed]}) // code here the message
 									  

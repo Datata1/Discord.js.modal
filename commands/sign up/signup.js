@@ -6,14 +6,14 @@ const { SlashCommandBuilder,
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('registration')
-		.setDescription('Starts the registration process. You can provide a Team-ID to join an existing Team.'),
+		.setName('signup')
+		.setDescription('Discord Server Member can sign up for something cool!'),
 	async execute(interaction) {
 
 		// Create the modal
 		const modal = new ModalBuilder()
 			.setCustomId('email')
-			.setTitle('Registration for the Challenge #2');
+			.setTitle('Sign up!');  // the title is displayed on the modal
 
 		// Add components to the modal
 
